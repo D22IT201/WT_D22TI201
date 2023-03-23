@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    Enter Name: <input type="text" name="username" id="user" placeholder="Name" onblur="getAPI()"><br>
+    <div id="userd"></div>
+    <script>
+        function printname(id, str) {
+            document.getElementById(id).textContent = str;
+        }
+        function setFocus(id) {
+            document.getElementById(id).focus();
+        }
+        async function getAPI() {
+            const name = document.getElementById("user").value;
+            const resdata = await fetch(`https://api.nationalize.io?name=${name}`);
+            const pdata = await resdata.json();
+            printname("userd", pdata.country[0].country_id);
+            setFocus("user")
+        }
+        getAPI();
+    </script>
+</body>
+
+</html>
